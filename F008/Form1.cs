@@ -16,21 +16,22 @@ namespace F008_Calculator_3_
             InitializeComponent();
         }
 
-        // ¼ıÀÚ Å¬¸¯ ¸Ş¼Òµå
+        // ìˆ«ì í´ë¦­ ë©”ì†Œë“œ
         private void btnNum_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
 
-            if (txtResult.Text == "\0" || opFlag == true)
+            if (txtResult.Text == "\0" || opFlag == true || memoryFlag == true)
             {
                 txtResult.Text = btn.Text;
                 opFlag = false;
+                memoryFlag = false;
             }
             else
                 txtResult.Text = txtResult.Text + btn.Text;
         }
 
-        //¿¬»êÀÚ Å¬¸¯ ¸Ş¼Òµå
+        //ì—°ì‚°ì í´ë¦­ ë©”ì†Œë“œ
         private void op_Click(object sender, EventArgs e)
         {
             opFlag = true;
@@ -40,7 +41,7 @@ namespace F008_Calculator_3_
             txtExp.Text = FirstValue + op;
         }
 
-        // . Å¬¸¯ ¸Ş¼Òµå
+        // . í´ë¦­ ë©”ì†Œë“œ
         private void btnDot_Click(object sender, EventArgs e)
         {
             if (txtResult.Text.Contains('.'))
@@ -49,23 +50,23 @@ namespace F008_Calculator_3_
                 txtResult.Text += ".";
         }
 
-        // ¡¾ Å¬¸¯ ¸Ş¼Òµå
+        // Â± í´ë¦­ ë©”ì†Œë“œ
         private void btnPM_Click(object sender, EventArgs e)
         {
             double v = Double.Parse(txtResult.Text);
             txtResult.Text = (-v).ToString();
         }
 
-        // % Å¬¸¯ ¸Ş¼Òµå
+        // % í´ë¦­ ë©”ì†Œë“œ
         private void btnPercent_Click(object sender, EventArgs e)
         {
-            if (txtExp.Text.EndsWith('¡¿') || txtExp.Text.EndsWith('¡À'))
+            if (txtExp.Text.EndsWith('Ã—') || txtExp.Text.EndsWith('Ã·'))
             {
                 double result_num = Double.Parse(txtResult.Text) * 0.01;
                 txtExp.Text += result_num.ToString();
                 txtResult.Text = result_num.ToString();
             }
-            else if (txtExp.Text.EndsWith('¡À'))
+            else if (txtExp.Text.EndsWith('Ã·'))
             {
                 double result_num = Double.Parse(txtResult.Text) * 0.01;
                 txtExp.Text += result_num.ToString();
@@ -78,28 +79,28 @@ namespace F008_Calculator_3_
             }
         }
 
-        // Á¦°ö±Ù
+        // ì œê³±ê·¼
         private void btnSqrt_Click(object sender, EventArgs e)
         {
-            txtExp.Text = "¡î(" + txtResult.Text + ") ";
+            txtExp.Text = "âˆš(" + txtResult.Text + ") ";
             txtResult.Text = Math.Sqrt(Double.Parse(txtResult.Text)).ToString();
         }
 
-        // Á¦°ö
+        // ì œê³±
         private void btnIndex_Click(object sender, EventArgs e)
         {
             txtExp.Text = "sqr(" + txtResult.Text + ") ";
             txtResult.Text = (Double.Parse(txtResult.Text) * Double.Parse(txtResult.Text)).ToString();
         }
 
-        // ¿ª¼ö
+        // ì—­ìˆ˜
         private void btnInverse_Click(object sender, EventArgs e)
         {
             txtExp.Text = "1/(" + txtResult.Text + ") ";
             txtResult.Text = (1 / Double.Parse(txtResult.Text)).ToString();
         }
 
-        // = Å¬¸¯ ¸Ş¼Òµå
+        // = í´ë¦­ ë©”ì†Œë“œ
         private void btnEqual_Click(object sender, EventArgs e)
         {
             double result;
@@ -117,17 +118,17 @@ namespace F008_Calculator_3_
                     SecondValue = result;
                     txtResult.Text = result.ToString();
                     break;
-                case "¡¿":
-                    txtExp.Text = FirstValue.ToString() + "¡¿" + SecondValue.ToString();
+                case "Ã—":
+                    txtExp.Text = FirstValue.ToString() + "Ã—" + SecondValue.ToString();
                     result = FirstValue * SecondValue;
                     txtResult.Text = result.ToString();
                     break;
-                case "¡À":
+                case "Ã·":
                     if (SecondValue == 0)
-                        txtResult.Text = "0À¸·Î ³ª´­ ¼ö ¾ø½À´Ï´Ù.";
+                        txtResult.Text = "0ìœ¼ë¡œ ë‚˜ëˆŒ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.";
                     else
                     {
-                        txtExp.Text = FirstValue.ToString() + "¡À" + SecondValue.ToString();
+                        txtExp.Text = FirstValue.ToString() + "Ã·" + SecondValue.ToString();
                         result = FirstValue / SecondValue;
                         txtResult.Text = result.ToString();
 
@@ -136,7 +137,7 @@ namespace F008_Calculator_3_
             }
         }
 
-        // ÃÊ±âÈ­ ¸Ş¼Òµå
+        // ì´ˆê¸°í™” ë©”ì†Œë“œ
         private void btnC_Click(object sender, EventArgs e)
         {
             txtResult.Text = "\0";
@@ -147,13 +148,13 @@ namespace F008_Calculator_3_
             opFlag = false;
         }
 
-        // txtResult ÃÊ±âÈ­ ¸Ş¼Òµå
+        // txtResult ì´ˆê¸°í™” ë©”ì†Œë“œ
         private void btnCE_Click(object sender, EventArgs e)
         {
             txtResult.Text = "\0";
         }
 
-        // backspace ¸Ş¼Òµå
+        // backspace ë©”ì†Œë“œ
         private void btnDel_Click(object sender, EventArgs e)
         {
             txtResult.Text = txtResult.Text.Remove(txtResult.Text.Length - 1);
